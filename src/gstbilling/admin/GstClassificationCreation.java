@@ -148,13 +148,28 @@ public class GstClassificationCreation extends javax.swing.JInternalFrame {
         jLabel13.setText("Based On Value");
 
         jComboigst.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jComboigst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
+        jComboigst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "0", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "28" }));
+        jComboigst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboigstActionPerformed(evt);
+            }
+        });
 
         jCombocgst.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jCombocgst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
+        jCombocgst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "0", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "28" }));
+        jCombocgst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCombocgstActionPerformed(evt);
+            }
+        });
 
         jCombosgst.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jCombosgst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
+        jCombosgst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "0", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "28" }));
+        jCombosgst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCombosgstActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jLabel14.setText("%");
@@ -202,22 +217,17 @@ public class GstClassificationCreation extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -340,10 +350,19 @@ public class GstClassificationCreation extends javax.swing.JInternalFrame {
     private void jRadionoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadionoActionPerformed
       if(jRadiono.isSelected())
           ss="No";
+      jComboigst.setSelectedItem("0");
+      jCombosgst.setSelectedItem("0");
+      jCombocgst.setSelectedItem("0");
+      jComboigst.setEnabled(false);
+      jCombosgst.setEnabled(false);
+      jCombocgst.setEnabled(false);
     }//GEN-LAST:event_jRadionoActionPerformed
-
+     String namelength,idlength;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
+            namelength=jproductname.getText();
+            idlength=jproductid.getText();
+           if((namelength.length()>0)&&(idlength.length()>0)){ 
           Connection con=Connect.connect();
          PreparedStatement ps=con.prepareStatement("Insert into productcreated(productid,productname,Hsnnumber,productdescibe,isgst,natureoftransac,price,igstper,cgstper,sgstper,producttype,modifieddate)values(?,?,?,?,?,?,?,?,?,?,?,now()) ");
          ps.setString(1,jproductid.getText());
@@ -353,9 +372,10 @@ public class GstClassificationCreation extends javax.swing.JInternalFrame {
          ps.setString(5, ss);
       
           
-           System.out.println(ss);
+           
          ps.setString(6, jcombonature.getSelectedItem().toString());
          ps.setString(7, jprice.getText());
+         System.out.print(jComboigst.getSelectedItem().toString());
          ps.setString(8,jComboigst.getSelectedItem().toString());
          ps.setString(9,jCombocgst.getSelectedItem().toString());
          ps.setString(10,jCombosgst.getSelectedItem().toString());
@@ -365,14 +385,44 @@ public class GstClassificationCreation extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(this, "SUCCESSFULLY Inserted","Information Message",JOptionPane.INFORMATION_MESSAGE);
          else
              JOptionPane.showMessageDialog(this, "RECHANGED SOME ERROR OCCUR","Information Message",JOptionPane.INFORMATION_MESSAGE);
-        }catch(Exception ex){JOptionPane.showMessageDialog(this, "Error"+ex,"Information Message",JOptionPane.INFORMATION_MESSAGE);}
+        }
+        
+        else{
+                        JOptionPane.showMessageDialog(this,"Fill all field properly");
+           }
+        }   catch(Exception ex){JOptionPane.showMessageDialog(this, "Error"+ex,"Information Message",JOptionPane.INFORMATION_MESSAGE);}
     }//GEN-LAST:event_jButton1ActionPerformed
  String ss;
     private void jRadioyesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioyesActionPerformed
         // TODO add your handling code here:
         if(jRadioyes.isSelected())
            ss="Yes"; 
+        jComboigst.setEnabled(true);
+      jCombosgst.setEnabled(true);
+      jCombocgst.setEnabled(true);
     }//GEN-LAST:event_jRadioyesActionPerformed
+
+    private void jComboigstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboigstActionPerformed
+        if(jComboigst.hasFocus()){
+            jCombocgst.setSelectedItem("0");
+            jCombosgst.setSelectedItem("0");
+        }
+        
+    }//GEN-LAST:event_jComboigstActionPerformed
+
+    private void jCombosgstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCombosgstActionPerformed
+      if(jCombosgst.hasFocus()){
+          jComboigst.setSelectedItem("0");
+          jCombocgst.setSelectedItem(jCombosgst.getSelectedItem().toString());
+      }
+    }//GEN-LAST:event_jCombosgstActionPerformed
+
+    private void jCombocgstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCombocgstActionPerformed
+        if(jCombocgst.hasFocus()){
+          jComboigst.setSelectedItem("0");
+          jCombosgst.setSelectedItem(jCombocgst.getSelectedItem().toString());
+        }
+    }//GEN-LAST:event_jCombocgstActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

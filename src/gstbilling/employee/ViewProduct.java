@@ -27,9 +27,7 @@ public class ViewProduct extends javax.swing.JInternalFrame {
       PreparedStatement ps=con.prepareStatement("select * from productcreated");
             ResultSet rs1=ps.executeQuery();
       jTable3.setModel(DbUtils.resultSetToTableModel(rs1));
-       ps=con.prepareStatement("select * from companydetail");
-            ResultSet rs3=ps.executeQuery();
-      jTable1.setModel(DbUtils.resultSetToTableModel(rs3));
+      
         }
         catch(Exception ex){}
     }
@@ -47,8 +45,6 @@ public class ViewProduct extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -71,21 +67,6 @@ public class ViewProduct extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Product Classification", jScrollPane3);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jTabbedPane1.addTab("Company Detail", jScrollPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,10 +84,8 @@ public class ViewProduct extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gstbilling.Connect connect1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 

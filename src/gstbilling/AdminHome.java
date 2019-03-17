@@ -15,29 +15,33 @@ import gstbilling.admin.GstCompanyDetail;
 import gstbilling.admin.PreviousInvoice;
 import gstbilling.admin.ViewProduct;
 import gstbilling.admin.changepassword;
+import gstbilling.employee.Invoice;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Rishabh
  */
 public class AdminHome extends javax.swing.JFrame {
-    static String role;
+   public static String role;
     public static String name;
     /**
      * Creates new form AdminHome
      */
     public AdminHome() {
         initComponents();
+       
           try{
              Connection con=Connect.connect();
              PreparedStatement ps=con.prepareStatement("Select * from companydetail");
              ResultSet rs=ps.executeQuery();
              if(rs.next())
              {
-                  
+                 jregistertype.setText(rs.getString("registrationtype"));
                  jcomname.setText(rs.getString("companyname"));
                  jcomstate.setText(rs.getString("state"));
                  jgst.setText(rs.getString("gstinnumber"));
@@ -59,46 +63,27 @@ public class AdminHome extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        jclassificationview = new javax.swing.JButton();
         jcomdetailbutton = new javax.swing.JButton();
         jprevinvoice = new javax.swing.JButton();
         jcreateinvoicebutton = new javax.swing.JButton();
-        jprintbillbutton = new javax.swing.JButton();
         jnewuser = new javax.swing.JButton();
         jcomname = new javax.swing.JLabel();
-        jcomstate = new javax.swing.JLabel();
+        jregistertype = new javax.swing.JLabel();
         jgst = new javax.swing.JLabel();
         jchangepassbutton1 = new javax.swing.JButton();
         jclassificationbutton1 = new javax.swing.JButton();
         jclassedit = new javax.swing.JButton();
+        jclassificationview1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jcomstate = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        desktopPane.setBackground(new java.awt.Color(230, 230, 230));
         desktopPane.setAutoscrolls(true);
-
-        jclassificationview.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jclassificationview.setText("GST CLASSIFICATION VIEW");
-        jclassificationview.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jclassificationviewActionPerformed(evt);
-            }
-        });
-        desktopPane.add(jclassificationview);
-        jclassificationview.setBounds(340, 380, 260, 40);
+        desktopPane.setInheritsPopupMenu(true);
 
         jcomdetailbutton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jcomdetailbutton.setText("GST COMPANY DETAIL");
@@ -108,7 +93,7 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         desktopPane.add(jcomdetailbutton);
-        jcomdetailbutton.setBounds(40, 80, 260, 40);
+        jcomdetailbutton.setBounds(340, 130, 260, 40);
 
         jprevinvoice.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jprevinvoice.setText("PREVIOUS INVOICE DETAIL");
@@ -118,7 +103,7 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         desktopPane.add(jprevinvoice);
-        jprevinvoice.setBounds(40, 140, 260, 40);
+        jprevinvoice.setBounds(340, 190, 260, 40);
 
         jcreateinvoicebutton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jcreateinvoicebutton.setText("CREATE INVOICE");
@@ -128,12 +113,7 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         desktopPane.add(jcreateinvoicebutton);
-        jcreateinvoicebutton.setBounds(40, 200, 260, 40);
-
-        jprintbillbutton.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jprintbillbutton.setText("PRINT INVOICE");
-        desktopPane.add(jprintbillbutton);
-        jprintbillbutton.setBounds(40, 260, 260, 40);
+        jcreateinvoicebutton.setBounds(340, 250, 260, 40);
 
         jnewuser.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jnewuser.setText("CREATE NEW USER");
@@ -143,19 +123,27 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         desktopPane.add(jnewuser);
-        jnewuser.setBounds(40, 380, 260, 40);
+        jnewuser.setBounds(340, 370, 260, 40);
 
-        jcomname.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jcomname.setBackground(new java.awt.Color(204, 204, 204));
+        jcomname.setFont(new java.awt.Font("Microsoft JhengHei", 1, 48)); // NOI18N
+        jcomname.setForeground(new java.awt.Color(102, 102, 102));
+        jcomname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         desktopPane.add(jcomname);
-        jcomname.setBounds(360, 30, 230, 40);
+        jcomname.setBounds(410, 30, 480, 80);
 
-        jcomstate.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        desktopPane.add(jcomstate);
-        jcomstate.setBounds(360, 80, 240, 40);
+        jregistertype.setBackground(new java.awt.Color(0, 0, 0));
+        jregistertype.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
+        jregistertype.setForeground(new java.awt.Color(102, 102, 102));
+        jregistertype.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        desktopPane.add(jregistertype);
+        jregistertype.setBounds(770, 130, 240, 40);
 
-        jgst.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jgst.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
+        jgst.setForeground(new java.awt.Color(102, 102, 102));
+        jgst.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         desktopPane.add(jgst);
-        jgst.setBounds(360, 140, 230, 40);
+        jgst.setBounds(770, 250, 230, 40);
 
         jchangepassbutton1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jchangepassbutton1.setText("CHANGE PASSWORD");
@@ -165,7 +153,7 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         desktopPane.add(jchangepassbutton1);
-        jchangepassbutton1.setBounds(40, 320, 260, 40);
+        jchangepassbutton1.setBounds(340, 310, 260, 40);
 
         jclassificationbutton1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jclassificationbutton1.setText("GST CLASSIFICATION CREATION");
@@ -175,7 +163,7 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         desktopPane.add(jclassificationbutton1);
-        jclassificationbutton1.setBounds(40, 20, 260, 40);
+        jclassificationbutton1.setBounds(340, 430, 260, 40);
 
         jclassedit.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jclassedit.setText("GST CLASSIFICATION UPD/DEL");
@@ -185,68 +173,38 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         desktopPane.add(jclassedit);
-        jclassedit.setBounds(340, 320, 260, 40);
+        jclassedit.setBounds(770, 310, 260, 40);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        jclassificationview1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jclassificationview1.setText("GST CLASSIFICATION VIEW");
+        jclassificationview1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
+                jclassificationview1ActionPerformed(evt);
             }
         });
-        fileMenu.add(exitMenuItem);
+        desktopPane.add(jclassificationview1);
+        jclassificationview1.setBounds(770, 370, 260, 40);
 
-        menuBar.add(fileMenu);
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 18)); // NOI18N
+        jButton1.setText("Log Out");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        desktopPane.add(jButton1);
+        jButton1.setBounds(770, 430, 260, 40);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        jcomstate.setBackground(new java.awt.Color(0, 0, 0));
+        jcomstate.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
+        jcomstate.setForeground(new java.awt.Color(102, 102, 102));
+        jcomstate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        desktopPane.add(jcomstate);
+        jcomstate.setBounds(770, 190, 240, 40);
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/image11.jpg"))); // NOI18N
+        desktopPane.add(jLabel1);
+        jLabel1.setBounds(4, 4, 1360, 650);
 
         setJMenuBar(menuBar);
 
@@ -254,19 +212,15 @@ public class AdminHome extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1367, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jcomdetailbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomdetailbuttonActionPerformed
   
@@ -274,12 +228,6 @@ public class AdminHome extends javax.swing.JFrame {
         desktopPane.add(gc);
         gc.setVisible(true);
     }//GEN-LAST:event_jcomdetailbuttonActionPerformed
-
-    private void jclassificationviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jclassificationviewActionPerformed
-       gstbilling.admin.ViewProduct vp=new ViewProduct();
-       desktopPane.add(vp);
-       vp.setVisible(true);
-    }//GEN-LAST:event_jclassificationviewActionPerformed
 
     private void jnewuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnewuserActionPerformed
         // TODO add your handling code here:
@@ -310,7 +258,7 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jclasseditActionPerformed
 
     private void jcreateinvoicebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcreateinvoicebuttonActionPerformed
-        gstbilling.admin.CreateInvoice ci=new CreateInvoice();
+        Invoice ci=new Invoice();
         desktopPane.add(ci);
         ci.setVisible(true);
     }//GEN-LAST:event_jcreateinvoicebuttonActionPerformed
@@ -321,26 +269,32 @@ public class AdminHome extends javax.swing.JFrame {
                 pi.setVisible(true);
     }//GEN-LAST:event_jprevinvoiceActionPerformed
 
+    private void jclassificationview1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jclassificationview1ActionPerformed
+      gstbilling.employee.ViewProduct vp=new gstbilling.employee.ViewProduct();
+      desktopPane.add(vp);
+      vp.setVisible(true);
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jclassificationview1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Login log=new Login();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jchangepassbutton1;
     private javax.swing.JButton jclassedit;
     private javax.swing.JButton jclassificationbutton1;
-    private javax.swing.JButton jclassificationview;
+    private javax.swing.JButton jclassificationview1;
     private javax.swing.JButton jcomdetailbutton;
     private javax.swing.JLabel jcomname;
     private javax.swing.JLabel jcomstate;
@@ -348,12 +302,8 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel jgst;
     private javax.swing.JButton jnewuser;
     private javax.swing.JButton jprevinvoice;
-    private javax.swing.JButton jprintbillbutton;
+    private javax.swing.JLabel jregistertype;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -5,10 +5,8 @@
  */
 package gstbilling.employee;
 
-import gstbilling.AdminHome;
 import gstbilling.Connect;
 import gstbilling.EmployeeHome;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -24,9 +22,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.time.Month;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,8 +35,6 @@ public class CreateInvoice extends javax.swing.JInternalFrame {
      */
     public CreateInvoice() {
         initComponents();
-        jPanel3.setVisible(false);
-        jPanel4.setVisible(false);
         filldetail();
         fetch();
     }
@@ -59,10 +52,13 @@ private void filldetail()
                     jgst.setText(rs.getString("gstinnumber"));
                         DateFill mm=new DateFill();
                         mm.fill();
-                        
-                       
+                        String moni="";
+                        if(Integer.parseInt(mm.getMonth())<10){
+                        moni="0"+mm.getMonth();}
+                        System.out.print(moni);
                      jComboyear.setSelectedItem(mm.getYear());
-                     jCombomonth.setSelectedItem(mm.getMonth());
+                     
+                     jCombomonth.setSelectedItem(moni);
                      jcombodate.setSelectedItem(mm.getDate1());
                     
                      jemail.setText(rs.getString("cinnumber"));
@@ -101,11 +97,6 @@ private void fetch()
              ResultSet rs=ps.executeQuery();
              while(rs.next())
              {  
-                 jComboprod1.addItem(rs.getString("productname"));
-                 jComboprod2.addItem(rs.getString("productname"));
-                 jComboprod3.addItem(rs.getString("productname"));
-                 
-                 
              }
       }
       catch(Exception ex){ JOptionPane.showMessageDialog(this, "Error"+ex,"Information Message",JOptionPane.INFORMATION_MESSAGE);}}
@@ -165,56 +156,8 @@ private void fetch()
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jComboBox8 = new javax.swing.JComboBox();
-        jComboprod2 = new javax.swing.JComboBox();
-        jComboqt2 = new javax.swing.JComboBox();
-        jamount2 = new javax.swing.JTextField();
-        jfinalamount2 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
-        jcgst2 = new javax.swing.JTextField();
-        jcgstrate2 = new javax.swing.JTextField();
-        jcgstfinal2 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
-        jsgst2 = new javax.swing.JTextField();
-        jsgstrate2 = new javax.swing.JTextField();
-        jsgstfinal2 = new javax.swing.JTextField();
-        jTextField29 = new javax.swing.JTextField();
-        jigst2 = new javax.swing.JTextField();
-        jigstrate2 = new javax.swing.JTextField();
-        jigstfinal2 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jpaneltotal2 = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jComboBox11 = new javax.swing.JComboBox();
-        jComboprod3 = new javax.swing.JComboBox();
-        jComboqt3 = new javax.swing.JComboBox();
-        jamount3 = new javax.swing.JTextField();
-        jfinalamount3 = new javax.swing.JTextField();
-        jTextField37 = new javax.swing.JTextField();
-        jcgst3 = new javax.swing.JTextField();
-        jcgstrate3 = new javax.swing.JTextField();
-        jcgstfinal3 = new javax.swing.JTextField();
-        jTextField41 = new javax.swing.JTextField();
-        jsgst3 = new javax.swing.JTextField();
-        jsgstrate3 = new javax.swing.JTextField();
-        jsgstfinal3 = new javax.swing.JTextField();
-        jTextField45 = new javax.swing.JTextField();
-        jigst3 = new javax.swing.JTextField();
-        jigstrate3 = new javax.swing.JTextField();
-        jigstfinal3 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jpaneltotal3 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         jsavebutton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JSeparator();
         jLabel22 = new javax.swing.JLabel();
         jothercharges = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
@@ -247,6 +190,7 @@ private void fetch()
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jLabel3.setText("Invoice Number");
 
+        jinvoice.setEditable(false);
         jinvoice.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         jinvoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +202,7 @@ private void fetch()
         jLabel4.setText("Date");
 
         jcombodate.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jcombodate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Date", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jcombodate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Date", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         jcombodate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcombodateActionPerformed(evt);
@@ -360,6 +304,11 @@ private void fetch()
 
         jcgst1.setEditable(false);
         jcgst1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jcgst1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcgst1ActionPerformed(evt);
+            }
+        });
 
         jcgstrate1.setEditable(false);
         jcgstrate1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
@@ -373,6 +322,11 @@ private void fetch()
 
         jsgst1.setEditable(false);
         jsgst1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jsgst1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jsgst1ActionPerformed(evt);
+            }
+        });
 
         jsgstrate1.setEditable(false);
         jsgstrate1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
@@ -391,6 +345,11 @@ private void fetch()
 
         jigst1.setEditable(false);
         jigst1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jigst1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jigst1ActionPerformed(evt);
+            }
+        });
 
         jigstrate1.setEditable(false);
         jigstrate1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
@@ -517,369 +476,6 @@ private void fetch()
                 .addContainerGap())
         );
 
-        jButton1.setText("ADD ITEM");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jComboBox8.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2" }));
-
-        jComboprod2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jComboprod2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select" }));
-        jComboprod2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboprod2ActionPerformed(evt);
-            }
-        });
-
-        jComboqt2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jComboqt2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
-        jComboqt2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboqt2ActionPerformed(evt);
-            }
-        });
-
-        jamount2.setEditable(false);
-        jamount2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jfinalamount2.setEditable(false);
-        jfinalamount2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jTextField21.setEditable(false);
-        jTextField21.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jTextField21.setText("CGST");
-
-        jcgst2.setEditable(false);
-        jcgst2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jcgstrate2.setEditable(false);
-        jcgstrate2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jcgstfinal2.setEditable(false);
-        jcgstfinal2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jTextField25.setEditable(false);
-        jTextField25.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jTextField25.setText("SGST");
-
-        jsgst2.setEditable(false);
-        jsgst2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jsgstrate2.setEditable(false);
-        jsgstrate2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jsgstrate2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jsgstrate2ActionPerformed(evt);
-            }
-        });
-
-        jsgstfinal2.setEditable(false);
-        jsgstfinal2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jTextField29.setEditable(false);
-        jTextField29.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jTextField29.setText("IGST");
-
-        jigst2.setEditable(false);
-        jigst2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jigstrate2.setEditable(false);
-        jigstrate2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jigstrate2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jigstrate2ActionPerformed(evt);
-            }
-        });
-
-        jigstfinal2.setEditable(false);
-        jigstfinal2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jLabel14.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel14.setText("Total Amount");
-
-        jpaneltotal2.setEditable(false);
-        jpaneltotal2.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jpaneltotal2.setText("0.0");
-
-        jLabel20.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel20.setText("%");
-
-        jLabel21.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel21.setText("%");
-
-        jLabel24.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel24.setText("%");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jComboprod2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboqt2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jigst2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jcgst2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jsgst2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jamount2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgstrate2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgstrate2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigstrate2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jigstfinal2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                            .addComponent(jsgstfinal2)
-                            .addComponent(jpaneltotal2))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jfinalamount2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcgstfinal2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboprod2)
-                    .addComponent(jComboqt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jamount2)
-                    .addComponent(jfinalamount2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgst2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgstrate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgstfinal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgst2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgstrate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgstfinal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigst2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigstrate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigstfinal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jpaneltotal2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-
-        jComboBox11.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "3" }));
-
-        jComboprod3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jComboprod3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select" }));
-        jComboprod3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboprod3ActionPerformed(evt);
-            }
-        });
-
-        jComboqt3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jComboqt3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
-        jComboqt3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboqt3ActionPerformed(evt);
-            }
-        });
-
-        jamount3.setEditable(false);
-        jamount3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jfinalamount3.setEditable(false);
-        jfinalamount3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jTextField37.setEditable(false);
-        jTextField37.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jTextField37.setText("CGST");
-
-        jcgst3.setEditable(false);
-        jcgst3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jcgstrate3.setEditable(false);
-        jcgstrate3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jcgstfinal3.setEditable(false);
-        jcgstfinal3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jTextField41.setEditable(false);
-        jTextField41.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jTextField41.setText("SGST");
-
-        jsgst3.setEditable(false);
-        jsgst3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jsgstrate3.setEditable(false);
-        jsgstrate3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jsgstrate3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jsgstrate3ActionPerformed(evt);
-            }
-        });
-
-        jsgstfinal3.setEditable(false);
-        jsgstfinal3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jTextField45.setEditable(false);
-        jTextField45.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jTextField45.setText("IGST");
-
-        jigst3.setEditable(false);
-        jigst3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jigstrate3.setEditable(false);
-        jigstrate3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jigstrate3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jigstrate3ActionPerformed(evt);
-            }
-        });
-
-        jigstfinal3.setEditable(false);
-        jigstfinal3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-
-        jLabel15.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel15.setText("Total Amount");
-
-        jpaneltotal3.setEditable(false);
-        jpaneltotal3.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jpaneltotal3.setText("0.0");
-
-        jLabel19.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel19.setText("%");
-
-        jLabel25.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel25.setText("%");
-
-        jLabel26.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        jLabel26.setText("%");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField45, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField41, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jComboprod3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jsgst3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboqt3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jcgst3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jigst3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jamount3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgstrate3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgstrate3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigstrate3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jigstfinal3, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                            .addComponent(jsgstfinal3)
-                            .addComponent(jpaneltotal3))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jfinalamount3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcgstfinal3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
-                        .addContainerGap(197, Short.MAX_VALUE))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboprod3)
-                    .addComponent(jComboqt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jamount3)
-                    .addComponent(jfinalamount3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgst3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgstrate3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcgstfinal3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgst3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgstrate3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsgstfinal3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel25))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigst3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigstrate3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jigstfinal3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jpaneltotal3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11))
-        );
-
         jsavebutton.setText("Save");
         jsavebutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -970,23 +566,16 @@ private void fetch()
                                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addGap(193, 193, 193))
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(359, 359, 359))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(12, 12, 12))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)))
-                        .addGap(28, 28, 28))
+                                .addGap(40, 40, 40))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1042,47 +631,45 @@ private void fetch()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jnetamount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jothercharges, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(198, 198, 198)
-                            .addComponent(jsavebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(89, 89, 89)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(315, 315, 315)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(63, 63, 63)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jphoneno, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, Short.MAX_VALUE))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jcustname, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jemployeedeclare, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(24, 24, 24)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jaadharno, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jcustemail, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jsavebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(315, 315, 315)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jphoneno, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcustname, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jemployeedeclare, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jaadharno, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jcustemail, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1120,17 +707,10 @@ private void fetch()
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1))
-                .addGap(17, 17, 17)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jothercharges, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1169,11 +749,13 @@ private void fetch()
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -1182,238 +764,51 @@ private void fetch()
     private void jinvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jinvoiceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jinvoiceActionPerformed
-
-    private void jsgstrate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsgstrate1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jsgstrate1ActionPerformed
-
-    private void jigstrate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jigstrate1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jigstrate1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if(3==panel)
-        { jPanel4.setVisible(true);panel++;}
-        if(2==panel)
-        {    jPanel3.setVisible(true);panel++;}
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jsgstrate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsgstrate2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jsgstrate2ActionPerformed
-
-    private void jigstrate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jigstrate2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jigstrate2ActionPerformed
-
-    private void jsgstrate3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsgstrate3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jsgstrate3ActionPerformed
-
-    private void jigstrate3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jigstrate3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jigstrate3ActionPerformed
-private static int amount1,amount2,amount3;  
-    private void jComboprod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboprod1ActionPerformed
-    try{
-            
-          Connection con=Connect.connect();
-          PreparedStatement ps=con.prepareStatement("select * from productcreated where productname=?");
-          ps.setString(1,jComboprod1.getSelectedItem().toString());
-          ResultSet rs=ps.executeQuery();
-             if(rs.next())
-             {  
-                 jamount1.setText(rs.getString("price"));
-                 jcgst1.setText(rs.getString("cgstper"));
-                 jsgst1.setText(rs.getString("sgstper"));
-                 jigst1.setText(rs.getString("igstper"));
-                 jfinalamount1.setText("");
-                 jComboqt1.setSelectedIndex(1);
-                        
-                 
-             }
-      }
-      catch(Exception ex){ JOptionPane.showMessageDialog(this, "Error"+ex,"Information Message",JOptionPane.INFORMATION_MESSAGE);}
-    }//GEN-LAST:event_jComboprod1ActionPerformed
-
-    private void jfinalamount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfinalamount1ActionPerformed
-     
-    }//GEN-LAST:event_jfinalamount1ActionPerformed
-
-    private void jComboqt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboqt1ActionPerformed
-           try{String quantity=jComboqt1.getSelectedItem().toString();
-       int quan=Integer.parseInt(quantity);
-             String amount=jamount1.getText();
-       int amt=Integer.parseInt(amount);
-       int res=quan*amt;       
-       String resu=String.valueOf(res);
-       float total1=res;
-       jfinalamount1.setText(resu);
-       String quantity1=jcgst1.getText();
-       int quan1=Integer.parseInt(quantity1);
-       float cres=((float)(amt*quan1)/100);
-       String cresu=String.valueOf(cres);
-       jcgstrate1.setText(cresu);
-       float cresa1=((float)(res*quan1)/100);
-       String cresua=String.valueOf(cresa1);
-       jcgstfinal1.setText(cresua); 
-       //-------------------------------------------------------------------------
-         quantity1=jsgst1.getText();
-        quan1=Integer.parseInt(quantity1);
-        cres=((float)(amt*quan1)/100);
-        cresu=String.valueOf(cres);
-       jsgstrate1.setText(cresu);
-      float  cresa2=((float)(res*quan1)/100);
-       cresua=String.valueOf(cresa2);
-       jsgstfinal1.setText(cresua); 
-       //----------------------------------------------------------------------------
-        quantity1=jigst1.getText();
-        quan1=Integer.parseInt(quantity1);
-        cres=((float)(amt*quan1)/100);
-        cresu=String.valueOf(cres);
-       jigstrate1.setText(cresu);
-      float  cresa=((float)(res*quan1)/100);
-        cresua=String.valueOf(cresa);
-       jigstfinal1.setText(cresua);
-       float result1=cresa+cresa2+cresa1+total1;
-       String out1=String.valueOf(result1);
-       jpaneltotal1.setText(out1);}catch(Exception ex){}
-    }//GEN-LAST:event_jComboqt1ActionPerformed
-
-    private void jComboprod2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboprod2ActionPerformed
-         try{
-            
-          Connection con=Connect.connect();
-          PreparedStatement ps=con.prepareStatement("select * from productcreated where productname=?");
-          ps.setString(1,jComboprod2.getSelectedItem().toString());
-          ResultSet rs=ps.executeQuery();
-             if(rs.next())
-             {  
-                 jamount2.setText(rs.getString("price"));
-                 jcgst2.setText(rs.getString("cgstper"));
-                 jsgst2.setText(rs.getString("sgstper"));
-                 jigst2.setText(rs.getString("igstper"));
-                 jfinalamount2.setText("");
-                 jComboqt2.setSelectedIndex(1);
-                            
-                 
-             }
-      }
-      catch(Exception ex){ JOptionPane.showMessageDialog(this, "Error"+ex,"Information Message",JOptionPane.INFORMATION_MESSAGE);}
-    }//GEN-LAST:event_jComboprod2ActionPerformed
-          static  float result1=0,result2=0,result3=0;
-    private void jComboqt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboqt2ActionPerformed
-        try{String quantity=jComboqt2.getSelectedItem().toString();
-       int quan=Integer.parseInt(quantity);
-             String amount=jamount2.getText();
-       int amt=Integer.parseInt(amount);
-       int res=quan*amt;       
-       String resu=String.valueOf(res);
-       float total1=res;
-       jfinalamount2.setText(resu);
-       String quantity1=jcgst2.getText();
-       int quan1=Integer.parseInt(quantity1);
-       float cres=((float)(amt*quan1)/100);
-       String cresu=String.valueOf(cres);
-       jcgstrate2.setText(cresu);
-       float cresa1=((float)(res*quan1)/100);
-       String cresua=String.valueOf(cresa1);
-       jcgstfinal2.setText(cresua); 
-       //-------------------------------------------------------------------------
-         quantity1=jsgst2.getText();
-        quan1=Integer.parseInt(quantity1);
-        cres=((float)(amt*quan1)/100);
-        cresu=String.valueOf(cres);
-       jsgstrate2.setText(cresu);
-      float  cresa2=((float)(res*quan1)/100);
-       cresua=String.valueOf(cresa2);
-       jsgstfinal2.setText(cresua); 
-       //----------------------------------------------------------------------------
-        quantity1=jigst2.getText();
-        quan1=Integer.parseInt(quantity1);
-        cres=((float)(amt*quan1)/100);
-        cresu=String.valueOf(cres);
-       jigstrate2.setText(cresu);
-      float  cresa=((float)(res*quan1)/100);
-        cresua=String.valueOf(cresa);
-       jigstfinal2.setText(cresua);
-       float result2=cresa+cresa2+cresa1+total1;
-       String out1=String.valueOf(result2);
-       jpaneltotal2.setText(out1);}catch(Exception ex){}
-    }//GEN-LAST:event_jComboqt2ActionPerformed
-        private float cresa1;
+private static int amount1,amount2,amount3;            static  double result1=0,result2=0,result3=0;        private double cresa1;
     private void fill(){
+        /*
         try{String quantity=jComboqt3.getSelectedItem().toString();
-       int quan=Integer.parseInt(quantity);
+       double quan=Double.parseDouble(quantity);
              String amount=jamount3.getText();
-       int amt=Integer.parseInt(amount);
-       int res=quan*amt;       
+       double amt=Double.parseDouble(amount);
+       double res=quan*amt;       
        String resu=String.valueOf(res);
-       float total1=res;
+       double total1=res;
        jfinalamount3.setText(resu);
        String quantity1=jcgst3.getText();
-       int quan1=Integer.parseInt(quantity1);
-       float cres=((float)(amt*quan1)/100);
+       double quan1=Double.parseDouble(quantity1);
+       double cres=((double)(amt*quan1)/100);
        String cresu=String.valueOf(cres);
        jcgstrate3.setText(cresu);
-       float cresa1=((float)(res*quan1)/100);
+       double cresa1=((double)(res*quan1)/100);
        String cresua=String.valueOf(cresa1);
        jcgstfinal3.setText(cresua); 
        //-------------------------------------------------------------------------
          quantity1=jsgst3.getText();
-        quan1=Integer.parseInt(quantity1);
-        cres=((float)(amt*quan1)/100);
+        quan1=Double.parseDouble(quantity1);
+        cres=((double)(amt*quan1)/100);
         cresu=String.valueOf(cres);
        jsgstrate3.setText(cresu);
-      float  cresa2=((float)(res*quan1)/100);
+      double  cresa2=((double)(res*quan1)/100);
        cresua=String.valueOf(cresa2);
        jsgstfinal3.setText(cresua); 
        //----------------------------------------------------------------------------
         quantity1=jigst3.getText();
-        quan1=Integer.parseInt(quantity1);
-        cres=((float)(amt*quan1)/100);
+        quan1=Double.parseDouble(quantity1);
+        cres=((double)(amt*quan1)/100);
         cresu=String.valueOf(cres);
        jigstrate3.setText(cresu);
-      float  cresa=((float)(res*quan1)/100);
+      double  cresa=((double)(res*quan1)/100);
         cresua=String.valueOf(cresa);
        jigstfinal3.setText(cresua);
-       float result3=cresa+cresa2+cresa1+total1;
+       double result3=cresa+cresa2+cresa1+total1;
        String out1=String.valueOf(result3);
-       jpaneltotal3.setText(out1);}catch(Exception ex){}}
-    private void jComboqt3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboqt3ActionPerformed
-      fill();
-    }//GEN-LAST:event_jComboqt3ActionPerformed
-
-    private void jComboprod3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboprod3ActionPerformed
-        try{
-            
-          Connection con=Connect.connect();
-          PreparedStatement ps=con.prepareStatement("select * from productcreated where productname=?");
-          ps.setString(1,jComboprod3.getSelectedItem().toString());
-          ResultSet rs=ps.executeQuery();
-             if(rs.next())
-             {  
-                 jamount3.setText(rs.getString("price"));
-                 jcgst3.setText(rs.getString("cgstper"));
-                 jsgst3.setText(rs.getString("sgstper"));
-                 jigst3.setText(rs.getString("igstper"));
-                 jfinalamount3.setText("");
-                 jComboqt3.setSelectedIndex(1);
-                            
-                 
-             }
-      }
-      catch(Exception ex){ JOptionPane.showMessageDialog(this, "Error"+ex,"Information Message",JOptionPane.INFORMATION_MESSAGE);}
-    }//GEN-LAST:event_jComboprod3ActionPerformed
-
+       jpaneltotal3.setText(out1);}catch(Exception ex){}*/}
+        
+        
     private void jemployeedeclareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jemployeedeclareActionPerformed
     
     }//GEN-LAST:event_jemployeedeclareActionPerformed
-
-    private void jigstfinal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jigstfinal1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jigstfinal1ActionPerformed
 
     private void jCombomonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCombomonthActionPerformed
         // TODO add your handling code here:
@@ -1462,10 +857,10 @@ private static int amount1,amount2,amount3;
                ps.setString(3, dd.toString());
                ps.setString(4,jComboprod1.getSelectedItem().toString());
                ps.setString(5, jComboqt1.getSelectedItem().toString());
-               ps.setString(6, jComboprod2.getSelectedItem().toString());
-               ps.setString(7, jComboqt2.getSelectedItem().toString());
-               ps.setString(8, jComboprod3.getSelectedItem().toString());
-               ps.setString(9, jComboqt3.getSelectedItem().toString());
+//               ps.setString(6, jComboprod2.getSelectedItem().toString());
+//               ps.setString(7, jComboqt2.getSelectedItem().toString());
+//               ps.setString(8, jComboprod3.getSelectedItem().toString());
+//               ps.setString(9, jComboqt3.getSelectedItem().toString());
                ps.setString(10,jothercharges.getText());
                ps.setString(11,jnetamount.getText());
                int a=ps.executeUpdate();
@@ -1488,14 +883,14 @@ private static int amount1,amount2,amount3;
     }//GEN-LAST:event_jsavebuttonActionPerformed
 
     private void jotherchargesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jotherchargesKeyReleased
-     try{   float tp1=0.0f;
-        float tp2=0.0f;
-        float tp3=0.0f;
-        tp1=Float.parseFloat(jpaneltotal1.getText());
-              tp2=Float.parseFloat(jpaneltotal2.getText());
-               tp3=Float.parseFloat(jpaneltotal3.getText());
-        float kk=tp1+tp2+tp3+Float.parseFloat(jothercharges.getText());
-        jnetamount.setText(String.valueOf(kk));
+     try{   double tp1;
+        double tp2;
+        double tp3;
+        tp1=Double.parseDouble(jpaneltotal1.getText());
+//              tp2=Double.parseDouble(jpaneltotal2.getText());
+//               tp3=Double.parseDouble(jpaneltotal3.getText());
+//        double kk=tp1+tp2+tp3+Double.parseDouble(jothercharges.getText());
+     //   jnetamount.setText(String.valueOf(kk));
      }catch(Exception ex){}
     }//GEN-LAST:event_jotherchargesKeyReleased
 public class BillPrintable implements Printable {
@@ -1563,40 +958,90 @@ public class BillPrintable implements Printable {
             g2d.drawString("                               "+jcompname.getText()+"                                          ",12,y);y+=yShift;
             
             g2d.drawString(" ------------------------------------------------------------------------------------------------",12,y);y+=headerRectHeight;
-            g2d.drawString(" Invoice No:- "+jinvoice.getText()+"                             CIN NO:-"+jemail.getText(),12, y);y+=yShift;
-             g2d.drawString(" Date:- "+jcombodate.getSelectedItem().toString()+"-"+jCombomonth.getSelectedItem().toString()+"-"+jComboyear.getSelectedItem().toString()+"                                  GST NO:-"+jgst.getText(),12, y);y+=yShift;
-            g2d.drawString(" -----------------------------------------------------------------------------------------------",10,y);y+=yShift;
+            g2d.drawString(" Invoice No:- "+jinvoice.getText(),12, y);
+            g2d.drawString(" CIN NO:-"+jemail.getText(),290, y);y+=yShift;
+             g2d.drawString(" Date:- "+jcombodate.getSelectedItem().toString()+"-"+jCombomonth.getSelectedItem().toString()+"-"+jComboyear.getSelectedItem().toString(),12, y);
+            g2d.drawString(" GST NO:-"+jgst.getText(),290, y);y+=yShift;
+             g2d.drawString(" -----------------------------------------------------------------------------------------------",10,y);y+=yShift;
             g2d.drawString(" Product             Quantity              Rate                   Amount      ",10,y);y+=yShift;
             g2d.drawString(" --------------------------------------------------------------------------------------------------",10,y);y+=headerRectHeight;
              g2d.drawString("                                                                                                 ",10,y);y+=yShift;
-            g2d.drawString(" "+jComboprod1.getSelectedItem().toString()+"                 "+jComboqt1.getSelectedItem().toString()+"                      "+jamount1.getText()+"                  "+jfinalamount1.getText(),10,y);y+=yShift;
-            g2d.drawString(" "+jTextField5.getText()+jcgst1.getText()+"                "+jcgstrate1.getText()+"                   "+jcgstfinal1.getText()+"                ",10,y);y+=yShift;
-            g2d.drawString(" "+jTextField11.getText()+jsgst1.getText()+"                "+jsgst1.getText()+"                      "+jsgstfinal1.getText()+"                ",10,y);y+=yShift;
-            g2d.drawString(" "+jTextField16.getText()+jigst1.getText()+"                "+jigst1.getText()+"                      "+jigstfinal1.getText()+"                ",10,y);y+=yShift;
+            g2d.drawString(" "+jComboprod1.getSelectedItem().toString(),10,y);
+            g2d.drawString(jComboqt1.getSelectedItem().toString(),135,y);
+            g2d.drawString(jamount1.getText(),245,y);
+            g2d.drawString(jfinalamount1.getText(),365, y);y+=yShift;
+            
+            g2d.drawString(" "+jTextField5.getText()+""+jcgst1.getText(),10,y);
+            g2d.drawString(jcgstrate1.getText(),245,y);
+            g2d.drawString(jcgstfinal1.getText(),365,y);y+=yShift;
+            
+           
+            g2d.drawString(" "+jTextField11.getText()+""+jsgst1.getText(),10,y);
+            g2d.drawString(jsgstrate1.getText(),245,y);
+            g2d.drawString(jsgstfinal1.getText(),365,y);y+=yShift;
+            
+            g2d.drawString(" "+jTextField16.getText()+jigst1.getText(),10,y);
+            g2d.drawString(jigstrate1.getText(),245,y);
+            g2d.drawString(jigstfinal1.getText(),365,y);y+=yShift;
+           
+         
+            /*
              g2d.drawString("                                                                                                 ",10,y);y+=yShift;
             if(!jamount2.getText().isEmpty())
             {
-            g2d.drawString(" "+jComboprod2.getSelectedItem().toString()+"                 "+jComboqt2.getSelectedItem().toString()+"                      "+jamount2.getText()+"                  "+jfinalamount2.getText(),10,y);y+=yShift;
-            g2d.drawString(" "+jTextField5.getText()+jcgst2.getText()+"                "+jcgstrate2.getText()+"                   "+jcgstfinal2.getText()+"                ",10,y);y+=yShift;
-            g2d.drawString(" "+jTextField11.getText()+jsgst2.getText()+"                "+jsgst2.getText()+"                      "+jsgstfinal2.getText()+"                ",10,y);y+=yShift;
-            g2d.drawString(" "+jTextField16.getText()+jigst2.getText()+"                "+jigst2.getText()+"                      "+jigstfinal2.getText()+"                ",10,y);y+=yShift;
+                  g2d.drawString(" "+jComboprod2.getSelectedItem().toString(),10,y);
+            g2d.drawString(jComboqt2.getSelectedItem().toString(),135,y);
+            g2d.drawString(jamount2.getText(),245,y);
+            g2d.drawString(jfinalamount2.getText(),365, y);y+=yShift;
+            
+            g2d.drawString(" "+jTextField5.getText()+jcgst2.getText(),10,y);
+            g2d.drawString(jcgstrate2.getText(),245,y);
+            g2d.drawString(jcgstfinal2.getText(),365,y);y+=yShift;
+          
+            g2d.drawString(" "+jTextField11.getText()+jsgst2.getText(),10,y);
+            g2d.drawString(jsgst2.getText(),245,y);
+            g2d.drawString(jsgstfinal2.getText(),365,y);y+=yShift;
+            
+            g2d.drawString(" "+jTextField16.getText()+jigst2.getText(),10,y);
+            g2d.drawString(jigst2.getText(),245,y);
+            g2d.drawString(jigstfinal2.getText(),365,y);y+=yShift;
+         
+           
             }
              g2d.drawString("                                                                                                     ",10,y);y+=yShift;
             if(!jamount3.getText().isEmpty())
             {
-            g2d.drawString(" "+jComboprod3.getSelectedItem().toString()+"                "+jComboqt3.getSelectedItem().toString()+"                      "+jamount3.getText()+"                 "+jfinalamount1.getText(),10,y);y+=yShift;
-            g2d.drawString(" "+jTextField5.getText()+jcgst3.getText()+"                "+jcgstrate3.getText()+"                   "+jcgstfinal3.getText()+"                ",10,y);y+=yShift;
-            g2d.drawString(" "+jTextField11.getText()+jsgst3.getText()+"                "+jsgst3.getText()+"                      "+jsgstfinal3.getText()+"                ",10,y);y+=yShift;
-            g2d.drawString(" "+jTextField16.getText()+jigst3.getText()+"                "+jigst3.getText()+"                      "+jigstfinal3.getText()+"                ",10,y);y+=yShift;
-            }
+                g2d.drawString(" "+jComboprod3.getSelectedItem().toString(),10,y);
+            g2d.drawString(jComboqt3.getSelectedItem().toString(),135,y);
+            g2d.drawString(jamount3.getText(),245,y);
+            g2d.drawString(jfinalamount1.getText(),365, y);y+=yShift;
+            
+             g2d.drawString(" "+jTextField5.getText()+jcgst3.getText(),10,y);
+            g2d.drawString(jcgstrate3.getText(),245,y);
+            g2d.drawString(jcgstfinal3.getText(),365,y);y+=yShift;
+            
+            g2d.drawString(" "+jTextField11.getText()+jsgst3.getText(),10,y);
+            g2d.drawString(jsgst3.getText(),245,y);
+            g2d.drawString(jsgstfinal3.getText(),365,y);y+=yShift;
+            
+           g2d.drawString(" "+jTextField16.getText()+jigst3.getText(),10,y);
+            g2d.drawString(jigst3.getText(),245,y);
+            g2d.drawString(jigstfinal3.getText(),365,y);y+=yShift;
+            
+            
+            }*/
             g2d.drawString(" ---------------------------------------------------------------------------------------------------",10,y);y+=yShift;
-            g2d.drawString(" Other Charges                                "+jothercharges.getText()+"                                             ",10,y);y+=yShift;
-              g2d.drawString(" Net Amount                                                       "+jnetamount.getText()+"                  ",10,y);y+=yShift;
+            g2d.drawString(" Other Charges    ",10,y);
+            g2d.drawString(jothercharges.getText(),245,y);y+=yShift;
+            g2d.drawString(" Net Amount  ",10,y);
+            g2d.drawString(jnetamount.getText(),365,y);y+=yShift;
             g2d.drawString(" ---------------------------------------------------------------------------------------------------",10,y);y+=yShift;
             g2d.drawString("                                                                                                   ",10,y);y+=yShift;
-            g2d.drawString(" Customer name: "+jcustname.getText()+"           "+"CustomerEmail: "+jcustemail.getText()+"   ",10,y);y+=yShift;
-             g2d.drawString(" Customer Phone: "+jphoneno.getText()+"           "+"CustomerEmail: "+jaadharno.getText()+"   ",10,y);y+=yShift;
-             g2d.drawString("                                                                                                    ",10,y);y+=yShift;
+            g2d.drawString(" Customer name: "+jcustname.getText()+"           ",10,y);
+            g2d.drawString(" "+"CustomerEmail: "+jcustemail.getText()+"   ",225,y); y+=yShift;
+            g2d.drawString(" Customer Phone: "+jphoneno.getText()+"           ",10,y);
+            g2d.drawString(" CustomerAadhar: "+jaadharno.getText()+"   ",225,y); y+=yShift;
+            g2d.drawString("                                                                                                    ",10,y);y+=yShift;
             g2d.drawString(" ---------------------------------------------------------------------------------------------------",10,y);y+=yShift;
             g2d.drawString("                ",10,y);y+=yShift;
             g2d.drawString(" Invoice Declared By: "+jemployeedeclare.getText()+"            ", 10, y);y+=yShift;
@@ -1605,7 +1050,7 @@ public class BillPrintable implements Printable {
            g2d.drawString("                                                                  ",10,y);y+=yShift;
            g2d.drawString("                                                                  ",10,y);y+=yShift;
            g2d.drawLine(12, 480, 580, 480);y+=yShift;
-           
+          
                    
            
              
@@ -1667,21 +1112,103 @@ protected static double toPPI(double inch) {
                  ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jigstfinal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jigstfinal1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jigstfinal1ActionPerformed
+
+    private void jigstrate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jigstrate1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jigstrate1ActionPerformed
+
+    private void jigst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jigst1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jigst1ActionPerformed
+
+    private void jsgstrate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsgstrate1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jsgstrate1ActionPerformed
+
+    private void jsgst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsgst1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jsgst1ActionPerformed
+
+    private void jcgst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcgst1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcgst1ActionPerformed
+
+    private void jfinalamount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfinalamount1ActionPerformed
+
+    }//GEN-LAST:event_jfinalamount1ActionPerformed
+
+    private void jComboqt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboqt1ActionPerformed
+        try{String quantity=jComboqt1.getSelectedItem().toString();
+            double quan=Double.parseDouble(quantity);
+            String amount=jamount1.getText();
+            double amt=Double.parseDouble(amount);
+            double res=quan*amt;
+            String resu=String.valueOf(res);
+            double total1=res;
+            jfinalamount1.setText(resu);
+            String quantity1=jcgst1.getText();
+            double quan1=Double.parseDouble(quantity1);
+            double cres=((double)(amt*quan1)/100);
+            String cresu=String.valueOf(cres);
+            jcgstrate1.setText(cresu);
+            double cresa1=((double)(res*quan1)/100);
+            String cresua=String.valueOf(cresa1);
+            jcgstfinal1.setText(cresua);
+            //-------------------------------------------------------------------------
+            quantity1=jsgst1.getText();
+            quan1=Double.parseDouble(quantity1);
+            cres=((double)(amt*quan1)/100);
+            cresu=String.valueOf(cres);
+            jsgstrate1.setText(cresu);
+            double  cresa2=((double)(res*quan1)/100);
+            cresua=String.valueOf(cresa2);
+            jsgstfinal1.setText(cresua);
+            //----------------------------------------------------------------------------
+            quantity1=jigst1.getText();
+            quan1=Double.parseDouble(quantity1);
+            cres=((double)(amt*quan1)/100);
+            cresu=String.valueOf(cres);
+            jigstrate1.setText(cresu);
+            double  cresa=((double)(res*quan1)/100);
+            cresua=String.valueOf(cresa);
+            jigstfinal1.setText(cresua);
+            double result1=cresa+cresa2+cresa1+total1;
+            String out1=String.valueOf(result1);
+            jpaneltotal1.setText(out1);}catch(Exception ex){}
+    }//GEN-LAST:event_jComboqt1ActionPerformed
+
+    private void jComboprod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboprod1ActionPerformed
+        try{
+
+            Connection con=Connect.connect();
+            PreparedStatement ps=con.prepareStatement("select * from productcreated where productname=?");
+            ps.setString(1,jComboprod1.getSelectedItem().toString());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next())
+            {
+                jamount1.setText(rs.getString("price"));
+                jcgst1.setText(rs.getString("cgstper"));
+                jsgst1.setText(rs.getString("sgstper"));
+                jigst1.setText(rs.getString("igstper"));
+                jfinalamount1.setText("");
+                jComboqt1.setSelectedIndex(1);
+
+            }
+        }
+        catch(Exception ex){ JOptionPane.showMessageDialog(this, "Error"+ex,"Information Message",JOptionPane.INFORMATION_MESSAGE);}
+    }//GEN-LAST:event_jComboprod1ActionPerformed
     int panel = 2;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox11;
     private javax.swing.JComboBox jComboBox7;
-    private javax.swing.JComboBox jComboBox8;
     private javax.swing.JComboBox jCombomonth;
     private javax.swing.JComboBox jComboprod1;
-    private javax.swing.JComboBox jComboprod2;
-    private javax.swing.JComboBox jComboprod3;
     private javax.swing.JComboBox jComboqt1;
-    private javax.swing.JComboBox jComboqt2;
-    private javax.swing.JComboBox jComboqt3;
     private javax.swing.JComboBox jCombostate;
     private javax.swing.JComboBox jComboyear;
     private javax.swing.JLabel jLabel1;
@@ -1689,20 +1216,12 @@ protected static double toPPI(double inch) {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -1717,34 +1236,17 @@ protected static double toPPI(double inch) {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField41;
-    private javax.swing.JTextField jTextField45;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jaadharno;
     private javax.swing.JTextField jamount1;
-    private javax.swing.JTextField jamount2;
-    private javax.swing.JTextField jamount3;
     private javax.swing.JTextField jcgst1;
-    private javax.swing.JTextField jcgst2;
-    private javax.swing.JTextField jcgst3;
     private javax.swing.JTextField jcgstfinal1;
-    private javax.swing.JTextField jcgstfinal2;
-    private javax.swing.JTextField jcgstfinal3;
     private javax.swing.JTextField jcgstrate1;
-    private javax.swing.JTextField jcgstrate2;
-    private javax.swing.JTextField jcgstrate3;
     private javax.swing.JComboBox jcombodate;
     private javax.swing.JTextField jcompname;
     private javax.swing.JTextField jcustemail;
@@ -1752,34 +1254,18 @@ protected static double toPPI(double inch) {
     private javax.swing.JTextField jemail;
     private javax.swing.JTextField jemployeedeclare;
     private javax.swing.JTextField jfinalamount1;
-    private javax.swing.JTextField jfinalamount2;
-    private javax.swing.JTextField jfinalamount3;
     private javax.swing.JTextField jgst;
     private javax.swing.JTextField jigst1;
-    private javax.swing.JTextField jigst2;
-    private javax.swing.JTextField jigst3;
     private javax.swing.JTextField jigstfinal1;
-    private javax.swing.JTextField jigstfinal2;
-    private javax.swing.JTextField jigstfinal3;
     private javax.swing.JTextField jigstrate1;
-    private javax.swing.JTextField jigstrate2;
-    private javax.swing.JTextField jigstrate3;
     private javax.swing.JTextField jinvoice;
     private javax.swing.JTextField jnetamount;
     private javax.swing.JTextField jothercharges;
     private javax.swing.JTextField jpaneltotal1;
-    private javax.swing.JTextField jpaneltotal2;
-    private javax.swing.JTextField jpaneltotal3;
     private javax.swing.JTextField jphoneno;
     private javax.swing.JButton jsavebutton;
     private javax.swing.JTextField jsgst1;
-    private javax.swing.JTextField jsgst2;
-    private javax.swing.JTextField jsgst3;
     private javax.swing.JTextField jsgstfinal1;
-    private javax.swing.JTextField jsgstfinal2;
-    private javax.swing.JTextField jsgstfinal3;
     private javax.swing.JTextField jsgstrate1;
-    private javax.swing.JTextField jsgstrate2;
-    private javax.swing.JTextField jsgstrate3;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,21 +27,15 @@ public class PreviousInvoice extends javax.swing.JInternalFrame {
     private void fill(){
         try{
         Connection con=Connect.connect();
-        PreparedStatement ps=con.prepareStatement("select * from invoiceproduct");
+        PreparedStatement ps=con.prepareStatement("select * from productcreated");
         ResultSet rs=ps.executeQuery();
-            jtableproduct.setModel(DbUtils.resultSetToTableModel(rs));
+        jtableproduct.setModel(DbUtils.resultSetToTableModel(rs));
         ps=con.prepareStatement("select * from invoicecustomer");
         rs=ps.executeQuery(); 
                 jtablecustomer.setModel(DbUtils.resultSetToTableModel(rs));
-         ps=con.prepareStatement("select invoiceno,date,prod1,quant1,othercharges,netamount from invoiceproduct where typeofprod='1'");
+         ps=con.prepareStatement("select * from invoicedata");
          rs=ps.executeQuery();
-                jtableproduct1.setModel(DbUtils.resultSetToTableModel(rs));
-                ps=con.prepareStatement("select invoiceno,date,prod1,quant1,prod2,quant2,othercharges,netamount from invoiceproduct where typeofprod='2'");
-         rs=ps.executeQuery();
-                jTableprod2.setModel(DbUtils.resultSetToTableModel(rs));
-          ps=con.prepareStatement("select invoiceno,date,prod1,quant1,prod2,quant2,prod3,quant3,othercharges,netamount from invoiceproduct where typeofprod='3'");
-         rs=ps.executeQuery();
-                jtableprod3.setModel(DbUtils.resultSetToTableModel(rs));       
+                jtableproduct1.setModel(DbUtils.resultSetToTableModel(rs));     
         }catch(Exception ex){}
     }
     /**
@@ -62,10 +56,6 @@ public class PreviousInvoice extends javax.swing.JInternalFrame {
         jtablecustomer = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtableproduct1 = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTableprod2 = new javax.swing.JTable();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jtableprod3 = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,37 +119,7 @@ public class PreviousInvoice extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(jtableproduct1);
 
-        jTabbedPane1.addTab("Invoice with 1 type of product", jScrollPane4);
-
-        jTableprod2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(jTableprod2);
-
-        jTabbedPane1.addTab("Invoice with 2 type of prod ", jScrollPane5);
-
-        jtableprod3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane6.setViewportView(jtableprod3);
-
-        jTabbedPane1.addTab("Invoice with 3 type of product", jScrollPane6);
+        jTabbedPane1.addTab("Invoice product", jScrollPane4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,13 +141,9 @@ public class PreviousInvoice extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTableprod2;
     private javax.swing.JTable jtablecustomer;
-    private javax.swing.JTable jtableprod3;
     private javax.swing.JTable jtableproduct;
     private javax.swing.JTable jtableproduct1;
     // End of variables declaration//GEN-END:variables
